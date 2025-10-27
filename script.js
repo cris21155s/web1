@@ -1,32 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
     const noButton = document.getElementById('noButton');
     const container = document.querySelector('.container');
+    const yesButton = document.getElementById('yesButton');
 
-    noButton.addEventListener('mouseover', () => {
-        // Obtenemos las dimensiones del contenedor y del botón
-        const containerRect = container.getBoundingClientRect();
+    // Función para mover el botón
+    function moveButton() {
+        // Obtenemos el tamaño INTERNO del contenedor (descontando el padding)
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
         const noButtonRect = noButton.getBoundingClientRect();
+        
+        // Calculamos la posición máxima para que no se salga
+        const maxX = containerWidth - noButtonRect.width;
+        const maxY = containerHeight - noButtonRect.height;
 
-        // Calculamos un rango de movimiento dentro del contenedor
-        // Aseguramos que el botón no se salga del contenedor
-        const maxX = containerRect.width - noButtonRect.width - 20; // 20px de margen
-        const maxY = containerRect.height - noButtonRect.height - 20; // 20px de margen
+        // Generamos posiciones aleatorias dentro de los límites
+        let newX = Math.random() * maxX;
+        let newY = Math.random() * maxY;
 
-        // Generamos nuevas posiciones aleatorias
-        const newX = Math.random() * maxX;
-        const newY = Math.random() * maxY;
-
-        // Aplicamos la transformación. Usamos 'absolute' y 'left/top' para mayor control
-        // El 'container' debe tener 'position: relative' para esto
-        noButton.style.position = 'absolute';
+        // Aplicamos la nueva posición
         noButton.style.left = `${newX}px`;
         noButton.style.top = `${newY}px`;
+    }
+
+    // --- EVENTOS PARA MOVER EL BOTÓN ---
+
+    // 1. Para computadoras (pasar el ratón)
+    noButton.addEventListener('mouseover', moveButton);
+    
+    // 2. Para celulares (tocar)
+    noButton.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevenimos el "click fantasma" y el scroll
+        moveButton();
     });
 
-    // Opcional: Si quieres que el botón "Sí" haga algo (por ejemplo, una alerta)
-    const yesButton = document.getElementById('yesButton');
+    // Moverlo una vez al cargar la página a una posición inicial
+    moveButton();
+
+    // --- EVENTO PARA EL BOTÓN 'SÍ' ---
     yesButton.addEventListener('click', () => {
-        alert('¡Sabía que dirías que sí! 😊');
-        // Puedes redirigir a otra página o mostrar un mensaje diferente aquí
+        // Ocultamos los botones
+        yesButton.style.display = 'none';
+        noButton.style.display = 'none';
+        
+        // Cambiamos el mensaje
+        const h1 = document.querySelector('h1');
+        h1.innerText = '¡Sabía que dirías que sí! 😊❤️';
+
+        // Opcional: Cambiamos la imagen a una de celebración (si tuvieras una)
+        // const img = document.querySelector('.cat-image');
+        // img.src = 'gato_feliz.png'; 
     });
 });
