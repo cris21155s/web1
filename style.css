@@ -3,10 +3,10 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #fce4ec; /* Un rosa suave */
+    background-color: #fce4ec;
     font-family: Arial, sans-serif;
     margin: 0;
-    overflow: hidden; /* Para que el botón no se salga de la vista si se mueve muy lejos */
+    overflow: hidden; 
 }
 
 .container {
@@ -16,15 +16,18 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     max-width: 90%;
+    /* --- CAMBIOS IMPORTANTES --- */
+    position: relative; /* Para que el botón 'No' se mueva DENTRO de este cuadro */
+    min-height: 400px;  /* Damos espacio vertical para el movimiento */
 }
 
 .cat-image {
-    width: 200px; /* Ajusta el tamaño de la imagen */
+    width: 200px;
     margin-bottom: 20px;
 }
 
 h1 {
-    color: #ff69b4; /* Un rosa más vibrante */
+    color: #ff69b4;
     font-size: 2.5em;
     margin-bottom: 30px;
 }
@@ -33,11 +36,12 @@ h1 {
     display: flex;
     justify-content: center;
     gap: 20px;
-    position: relative; /* Para que el botón 'No' pueda moverse dentro de este contenedor */
+    margin-top: 20px;
+    /* Ya no necesita position: relative */
 }
 
 .btn {
-    background-color: #ffb6c1; /* Rosa claro */
+    background-color: #ffb6c1;
     color: white;
     padding: 15px 30px;
     border: none;
@@ -49,14 +53,13 @@ h1 {
 }
 
 .btn:hover {
-    background-color: #ff85a2; /* Un rosa ligeramente más oscuro al pasar el ratón */
+    background-color: #ff85a2;
 }
 
 .no-btn {
-    position: absolute; /* Permite mover el botón 'No' */
-    left: 50%; /* Posición inicial, al centro */
-    transform: translateX(calc(-50% + 50px)); /* Ajusta la posición inicial para que no se superponga */
-    transition: all 0.2s ease-out; /* Transición más suave para el movimiento */
+    position: absolute; /* ¡Importante! Se posiciona relativo al .container */
+    transition: all 0.2s ease-out;
+    /* La posición inicial la pondrá el JavaScript */
 }
 
 /* Media queries para pantallas más pequeñas */
@@ -71,13 +74,18 @@ h1 {
     .cat-image {
         width: 150px;
     }
+    .container {
+        min-height: 350px; /* Un poco menos de alto en móvil */
+    }
     .buttons {
-        flex-direction: column; /* Apila los botones en pantallas pequeñas */
+        /* Apilamos el botón 'Sí' (el 'No' ya no está aquí) */
+        flex-direction: column;
+        align-items: center;
         gap: 10px;
     }
     .no-btn {
-        position: relative; /* En pantallas pequeñas, el botón 'No' no se moverá tanto o se reorganizará */
-        transform: none;
-        left: auto;
+        /* Hacemos el botón 'No' un poco más pequeño en móvil */
+        padding: 10px 20px;
+        font-size: 1em;
     }
 }
