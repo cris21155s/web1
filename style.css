@@ -1,0 +1,83 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fce4ec; /* Un rosa suave */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow: hidden; /* Para que el botón no se salga de la vista si se mueve muy lejos */
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 90%;
+}
+
+.cat-image {
+    width: 200px; /* Ajusta el tamaño de la imagen */
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #ff69b4; /* Un rosa más vibrante */
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative; /* Para que el botón 'No' pueda moverse dentro de este contenedor */
+}
+
+.btn {
+    background-color: #ffb6c1; /* Rosa claro */
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    background-color: #ff85a2; /* Un rosa ligeramente más oscuro al pasar el ratón */
+}
+
+.no-btn {
+    position: absolute; /* Permite mover el botón 'No' */
+    left: 50%; /* Posición inicial, al centro */
+    transform: translateX(calc(-50% + 50px)); /* Ajusta la posición inicial para que no se superponga */
+    transition: all 0.2s ease-out; /* Transición más suave para el movimiento */
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    .btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    .cat-image {
+        width: 150px;
+    }
+    .buttons {
+        flex-direction: column; /* Apila los botones en pantallas pequeñas */
+        gap: 10px;
+    }
+    .no-btn {
+        position: relative; /* En pantallas pequeñas, el botón 'No' no se moverá tanto o se reorganizará */
+        transform: none;
+        left: auto;
+    }
+}
